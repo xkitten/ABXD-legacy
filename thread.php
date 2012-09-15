@@ -299,7 +299,7 @@ $total = $thread['replies'] + 1; //+1 for the OP
 $ppp = $loguser['postsperpage'];
 if(!$ppp) $ppp = 20;
 if(isset($_GET['from']))
-	$from = $_GET['from'];
+	$from = (int)$_GET['from'];
 else
 	if(isset($pid))
 		//$from = (floor(FetchResult("select count(*) from posts where thread=".$tid." and id < ".$pid) / $ppp)) * $ppp;
