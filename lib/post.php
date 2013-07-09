@@ -78,7 +78,7 @@ function LoadBlocklayouts()
 
 function LoadRanks($rankset)
 {
-	global $ranks;	
+	global $ranks;
 	if(isset($ranks[$rankset]))
 		return;
 	$ranks[$poster['rankset']] = array();
@@ -127,8 +127,8 @@ function GetToNextRank($poster)
 		$ret = $num - $poster['posts'];
 		if($num > $poster['posts'])
 			return $ret;
-	}	
-	
+	}
+
 	/*
 	if($poster['rankset'] == 0)
 		return 0;
@@ -213,6 +213,14 @@ function GetSyndrome($activity)
 }
 
 $text = "";
+function code_block($matches) {
+	//De-tabled [code] tag, based on BH's...
+    $list  = array("<"   ,"\\\"" ,"\\\\" ,"\\'","\r"  ,"["    ,":"    ,")"    ,"_"    );
+    $list2 = array("&lt;","\""   ,"\\"   ,"\'" ,"<br/>","&#91;","&#58;","&#41;","&#95;");
+
+	return '<code class="Code block">' . str_replace($list, $list2, $matches[1]) . '</code>';
+}
+
 function CleanUpPost($postText, $poster = "", $noSmilies = false, $noBr = false)
 {
 	global $smilies, $text;
@@ -221,7 +229,7 @@ function CleanUpPost($postText, $poster = "", $noSmilies = false, $noBr = false)
 
 	$s = $postText;
 	$s = str_replace("\r\n","\n", $s);
-	
+
 	$s = EatThatPork($s);
 
 	$s = preg_replace_callback("'\[source=(.*?)\](.*?)\[/source\]'si", "GeshiCallbackL", $s);
@@ -232,12 +240,7 @@ function CleanUpPost($postText, $poster = "", $noSmilies = false, $noBr = false)
 	//$s = str_replace("Xkeeper","XKitten", $s); //I couldn't help myself -- Kawa
 	//$s = preg_replace("'([c|C])lassic'si","\\1lbuttic", $s); //Same here -- Kawa
 
-	//De-tabled [code] tag, based on BH's...
-    $list  = array("<"   ,"\\\"" ,"\\\\" ,"\\'","\r"  ,"["    ,":"    ,")"    ,"_"    );
-    $list2 = array("&lt;","\""   ,"\\"   ,"\'" ,"<br/>","&#91;","&#58;","&#41;","&#95;");
-    $s = preg_replace("'\[code\](.*?)\[/code\]'sie",
-					'\''."<code class=\"Code block\">".'\''
-					.'.str_replace($list,$list2,\'\\1\').\'</code>\'',$s);
+    $s = preg_replace_callback("'\[code\](.*?)\[/code\]'si", 'code_block',$s);
 
 	$s = preg_replace("'\[b\](.*?)\[/b\]'si","<strong>\\1</strong>", $s);
 	$s = preg_replace("'\[i\](.*?)\[/i\]'si","<em>\\1</em>", $s);
@@ -278,7 +281,7 @@ function CleanUpPost($postText, $poster = "", $noSmilies = false, $noBr = false)
 	$s = preg_replace("'display:'si", "display<em></em>:", $s);
 
 	$s = preg_replace("@(on)(\w+?\s*?)=@si", '$1$2&#x3D;', $s);
-	
+
 	$s = preg_replace("'-moz-binding'si"," -mo<em></em>z-binding", $s);
 	$s = preg_replace("'filter:'si","filter<em></em>:>", $s);
 	$s = preg_replace("'javascript:'si","javascript<em></em>:>", $s);
@@ -324,10 +327,10 @@ function CleanUpPost($postText, $poster = "", $noSmilies = false, $noBr = false)
 		$s = preg_replace($orig, $repl, " ".$s." ");
 		$s = substr($s, 1, -1);
 	}
-	
+
 	$s = preg_replace_callback("@<a[^>]+href\s*=\s*\"(.*?)\"@si", 'ApplyNetiquetteToLinks', $s);
 	$s = preg_replace_callback("@<a[^>]+href\s*=\s*'(.*?)'@si", 'ApplyNetiquetteToLinks', $s);
-	$s = preg_replace_callback("@<a[^>]+href\s*=\s*([^\"'][^\s>]*)@si", 'ApplyNetiquetteToLinks', $s);	
+	$s = preg_replace_callback("@<a[^>]+href\s*=\s*([^\"'][^\s>]*)@si", 'ApplyNetiquetteToLinks', $s);
 
 	include("macros.php");
 	foreach($macros as $macro => $img)
@@ -343,11 +346,23 @@ function ApplyTags($text, $tags)
 	$s = $text;
 	foreach($tags as $tag => $val)
 		$s = str_replace("&".$tag."&", $val, $s);
-	if(is_numeric($tags['numposts']))
-		$s = preg_replace('@&(\d+)&@sie', 'max($1 - '.$tags['numposts'].', 0)', $s);
+	if(is_numeric($tags['postcount']))
+		$s = preg_replace_callback('@&(\d+)&@si', array(new MaxPosts($tags), 'max_posts_callback'), $s);
 	else
 		$s = preg_replace("'&(\d+)&'si", "preview", $s);
 	return $s;
+}
+
+// hax for anonymous function
+class MaxPosts {
+	var $tags;
+	function __construct($tags) {
+		$this->tags = $tags;
+	}
+
+	function max_posts_callback($results) {
+		return max($results[1] - $this->tags['postcount'], 0);
+	}
 }
 
 $sideBarStuff = "";
@@ -355,9 +370,9 @@ $sideBarData = 0;
 function MakePost($post, $thread, $forum, $ispm=0)
 {
 	global $loguser, $loguserid, $dateformat, $theme, $hacks, $isBot, $blocklayouts, $postText, $sideBarStuff, $sideBarData, $salt;
-	
+
 	$sideBarStuff = "";
-	
+
 	if(isset($_GET['pid']))
 		$highlight = (int)$_GET['pid'];
 
@@ -490,7 +505,7 @@ function MakePost($post, $thread, $forum, $ispm=0)
 		$sideBarStuff .= "<br />\n".__("Posts:")." ".$post['num']."/".$post['posts'];
 	else
 		$sideBarStuff .= "<br />\n".__("Posts:")." ".$post['posts'];
-		
+
 	$sideBarStuff .= "<br />\n".__("Since:")." ".cdate($loguser['dateformat'], $post['regdate'])."<br />";
 
 	$bucket = "sidebar"; include("./lib/pluginloader.php");
@@ -537,7 +552,7 @@ function MakePost($post, $thread, $forum, $ispm=0)
 		$postHeader = str_replace('$theme', $theme, ApplyTags(CleanUpPost($post['postheader'], "", $noSmilies, true), $tags));
 
 	$postText = ApplyTags(CleanUpPost($post['text'],$post['name'], $noSmilies, $noBr), $tags);
-	
+
 	$bucket = "postMangler"; include("./lib/pluginloader.php");
 
 	if($post['signature'] && !$isBlocked)
