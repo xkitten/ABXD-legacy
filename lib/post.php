@@ -215,8 +215,8 @@ function GetSyndrome($activity)
 $text = "";
 function code_block($matches) {
 	//De-tabled [code] tag, based on BH's...
-    $list  = array("<"   ,"\\\"" ,"\\\\" ,"\\'","\r"  ,"["    ,":"    ,")"    ,"_"    );
-    $list2 = array("&lt;","\""   ,"\\"   ,"\'" ,"<br/>","&#91;","&#58;","&#41;","&#95;");
+    $list  = array("<"   ,"\r"  ,"["    ,":"    ,")"    ,"_"    );
+    $list2 = array("&lt;","<br/>","&#91;","&#58;","&#41;","&#95;");
 
 	return '<code class="Code block">' . str_replace($list, $list2, $matches[1]) . '</code>';
 }
