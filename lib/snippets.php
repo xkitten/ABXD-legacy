@@ -39,11 +39,11 @@ function DoFooter($buffer)
 	if(!$noFooter)
 	{
 		//if(function_exists("runBucket")) runBucket("footerButtons");
-		
+
 		$footer = format(
 "
 		<div class=\"footer\">
-			Powered by <a href=\"https://github.com/Dirbaio/ABXD\">AcmlmBoard XD</a>, version 2.2.5<br />
+			Powered by <a href=\"https://github.com/Dirbaio/ABXD\">AcmlmBoard XD</a>, version 2.2.6<br />
 			By Kawa, Mega-Mario, Nikolaj, et al<br />
 			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe<br />
 			".__("Page rendered in {0} seconds with {1}.")."<br />
@@ -66,7 +66,7 @@ function DoFooter($buffer)
 ",	sprintf("%1.3f",usectime()-$timeStart), Plural($queries, __("MySQL query")),
 	$footerButtons, __("<!-- English translation by Kawa -->"));
 	}
-			
+
 	$boardTitle = htmlval($boardname);
 	if($title != "")
 		$boardTitle .= " &raquo; ".$title;
@@ -82,7 +82,7 @@ function DoFooter($buffer)
 	{
 		return $raw;
 	}
-		
+
 	$tidyConfig = array
 	(
 		"show-body-only"=>0,
@@ -202,11 +202,11 @@ function UserLink($user, $field = "id")
 			$classing = " class=\"nc22\"";
 		}
 	}
-	
+
 	$levels = array(-1 => " [".__("banned")."]", 0 => "", 1 => " [".__("local mod")."]", 2 => " [".__("full mod")."]", 3 => " [".__("admin")."]", 4 => " [".__("root")."]", 5 => " [".__("system")."]");
-	
+
 	$bucket = "userLink"; include('lib/pluginloader.php');
-	
+
 	$userlink = format("<a href=\"profile.php?id={0}\"><span{1} title=\"{3} ({0}){4}\">{2}</span></a>", $user[$field], $classing, $fname, str_replace(" ", "&nbsp;", htmlspecialchars($user['name'])), $levels[$user['powerlevel']]);
 	return $userlink;
 }
@@ -250,7 +250,7 @@ function MakeCrumbs($path, $links)
 			$crumbs .= str_replace('<TAGS>', '', $text). " &raquo; ";
 	}
 	$crumbs = substr($crumbs, 0, strlen($crumbs) - 8);
-	
+
 	write(
 "
 <div class=\"margin\">
@@ -299,7 +299,7 @@ function DoPrivateMessageBar()
 			format("<a href=\"showprivate.php?id={0}\">", $last['id']),
 			UserLink($user), cdate($dateformat, $last['date']));
 		}
-		
+
 		if($loguser['newcomments'])
 		{
 			$content .= format(
@@ -325,7 +325,7 @@ function DoSmileyBar($taname = "text")
 	global $smiliesOrdered;
 	$expandAt = 26;
 	LoadSmilies(TRUE);
-	
+
 	write(
 "
 	<div class=\"PoRT margin\" style=\"width: 90%\">
@@ -335,7 +335,7 @@ function DoSmileyBar($taname = "text")
 		<div class=\"errorc cell0\" id=\"smiliesContainer\">
 ");
 	if(count($smiliesOrdered) > $expandAt)
-		write("<button class=\"expander\" id=\"smiliesExpand\" onclick=\"expandSmilies();\">&#x25BC;</button>"); 
+		write("<button class=\"expander\" id=\"smiliesExpand\" onclick=\"expandSmilies();\">&#x25BC;</button>");
 	print "<div class=\"smilies\" id=\"commonSet\">";
 	for($i = 0; $i < count($smiliesOrdered) - 1; $i++)
 	{
@@ -410,7 +410,7 @@ function OnlineUsers($forum = 0, $update = true)
 	global $loguserid;
 	$forumClause = "";
 	$browseLocation = __("online");
-	
+
 	if ($update)
 	{
 		if ($loguserid)
@@ -418,14 +418,14 @@ function OnlineUsers($forum = 0, $update = true)
 		else
 			Query("UPDATE guests SET lastforum=".$forum." WHERE ip='".$_SERVER['REMOTE_ADDR']."'");
 	}
-       
+
 	if($forum)
 	{
 		$forumClause = " and lastforum=".$forum;
 		$forumName = FetchResult("SELECT title FROM forums WHERE id=".$forum);
 		$browseLocation = format(__("browsing {0}"), $forumName);
 	}
-       
+
 	$rOnlineUsers = Query("select id,name,displayname,sex,powerlevel,lastactivity,lastposttime,minipic from users where (lastactivity > ".(time()-300)." or lastposttime > ".(time()-300).")".$forumClause." order by name");
 	$onlineUsers = "";
 	$onlineUserCt = 0;
@@ -451,7 +451,7 @@ function OnlineUsers($forum = 0, $update = true)
 		$onlineUsers .= " | ".Plural($guests,__("guest"));
 	if($bots)
 		$onlineUsers .= " | ".Plural($bots,__("bot"));
-	       
+
 	return $onlineUsers;
 }
 

@@ -42,7 +42,7 @@ if(is_file("lib/database.php")) {
 	// It's update! Check if the version is really newer.
 	include("lib/mysql.php");
 	$misc = Fetch(Query("select * from misc"));
-	if($misc['version'] >= 224) {
+	if($misc['version'] >= 226) {
 		Kill("Updating to current version?");
 	}
 	mysql_close();
@@ -179,7 +179,7 @@ else if($_POST['action'] == "Install")
 	fclose($dbcfg);
 
 	include("lib/mysql.php");
-	
+
 	print "Detecting Tidy support&hellip; ";
 	$tidy = (int)function_exists('tidy_repair_string');
 	if($tidy)
@@ -217,8 +217,8 @@ else if($_POST['action'] == "Install")
 		fwrite($sltf, "<?php \$salt = \"".$salt."\" ?>\n");
 		fclose($sltf);
 	}
-	
-		
+
+
 	print "Writing board configuration file&hellip;<br />";
 	include("lib/settings.php");
 	$hax = @fopen("lib/settings.php", "w") or Kill(format("Could not open \"lib/{0}.php\" for writing. This has been checked for earlier, so if you see this error now, something very strange is going on.", "settings"), "Mysterious filesystem permission error");
@@ -268,12 +268,12 @@ else if($_POST['action'] == "Install")
 	print "Creating/updating tables&hellip;<br />";
 	//Query("DROP TABLE IF EXISTS `smilies`");
 	Upgrade();
-	
-	print "Adding bare neccesities&hellip;<br />"; 
+
+	print "Adding bare neccesities&hellip;<br />";
 	$misc = Query("select * from misc");
 	if(NumRows($misc) == 0)
 		Query("INSERT INTO `misc` (`views`, `hotcount`, `porabox`, `poratitle`, `milestone`, `maxuserstext`) VALUES (0, 30, '', 'Points of Required Attention', 'Nothing yet.', 'Nobody yet.');");
-	Query("UPDATE `misc` SET `version` = 224");
+	Query("UPDATE `misc` SET `version` = 226");
 	$smilies = Query("select * from smilies");
 	if(NumRows($smilies) == 0)
 		Query("

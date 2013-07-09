@@ -25,6 +25,11 @@ include("browsers.php");
 $qMisc = "select * from misc";
 $rMisc = Query($qMisc);
 $misc = Fetch($rMisc);
+if ($misc['version'] < 226)
+{
+	header('Location: install.php');
+	exit;
+}
 $qOnlineUsers = "select id, powerlevel, sex, name from users where lastactivity > ".(time()-300)." or lastposttime > ".(time()-300)." order by name";
 $rOnlineUsers = Query($qOnlineUsers);
 $qRecords = ""; //Thanks for inspiring me to check this out, Blackhole ;)
@@ -100,7 +105,7 @@ if($loguserid) //Are we logged in?
 	if(NumRows($rLogUser)) //We have at least one result.
 	{
 		$loguser = Fetch($rLogUser);
-		
+
 		//Bullcheck
 		$ourbull = hash('sha256', $loguser['id'].$loguser['password'].$salt.$loguser['pss'], FALSE);
 		if($loguserbull == $ourbull)
@@ -110,7 +115,7 @@ if($loguserid) //Are we logged in?
 				$qLastView = Query($rLastView);
 
 			$dateformat = $loguser['dateformat'].", ".$loguser['timeformat'];
-			
+
 			$wantGuest = FALSE;
 		}
 	}
@@ -121,7 +126,7 @@ if($wantGuest)
 	$qGuest = "insert into guests (date, ip, lasturl, useragent, bot) values (".time().", '".$_SERVER['REMOTE_ADDR']."', '".justEscape($thisURL)."', '".justEscape($_SERVER['HTTP_USER_AGENT'])."', ".$isBot.")";
  	if(!$noOnlineUsers)
  		$rGuest = Query($qGuest);
-	
+
 	$loguser = array("name"=>"", "powerlevel"=>0, "threadsperpage"=>50, "postsperpage"=>20, "theme"=>"default", "dateformat"=>"m-d-y", "timeformat"=>"h:i A", "fontsize"=>80, "timezone"=>0, "blocklayouts"=>$noGuestLayouts);
 	$loguserid = 0;
 }
