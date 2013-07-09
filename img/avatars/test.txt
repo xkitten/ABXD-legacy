@@ -1,0 +1,1 @@
+This file is needed for git. Feel free to ignore it. Installer should automatically remove it.
