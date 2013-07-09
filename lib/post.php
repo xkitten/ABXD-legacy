@@ -346,7 +346,7 @@ function ApplyTags($text, $tags)
 	$s = $text;
 	foreach($tags as $tag => $val)
 		$s = str_replace("&".$tag."&", $val, $s);
-	if(is_numeric($tags['postcount']))
+	if(is_numeric($tags['numposts']))
 		$s = preg_replace_callback('@&(\d+)&@si', array(new MaxPosts($tags), 'max_posts_callback'), $s);
 	else
 		$s = preg_replace("'&(\d+)&'si", "preview", $s);
@@ -361,7 +361,7 @@ class MaxPosts {
 	}
 
 	function max_posts_callback($results) {
-		return max($results[1] - $this->tags['postcount'], 0);
+		return max($results[1] - $this->tags['numposts'], 0);
 	}
 }
 
