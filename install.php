@@ -70,7 +70,7 @@ if(!isset($_POST['action']))
 	}
 	$test = @fopen("lib/test.txt", "w");
 	if($test === FALSE)
-		Kill(format("PHP does not seem to have write access to the /{1} directory ({0}{1}). This is required for proper functionality. Please contact your hosting provider for information on how to make that directory writable.", $_SERVER['DOCUMENT_ROOT'], "lib"), "Filesystem permission error");
+		Kill(format("PHP does not seem to have write access to the /{1} directory ({0}/{1}). This is required for proper functionality. Please contact your hosting provider for information on how to make that directory writable.", $_SERVER['DOCUMENT_ROOT'], "lib"), "Filesystem permission error");
 	else
 	{
 		fclose($test);
@@ -78,7 +78,7 @@ if(!isset($_POST['action']))
 	}
 	$test = @fopen("img/avatars/test.txt", "w");
 	if($test === FALSE)
-		Kill(format("PHP does not seem to have write access to the /{1} directory ({0}{1}). This is required for proper functionality. Please contact your hosting provider for information on how to make that directory writable.", $_SERVER['DOCUMENT_ROOT'], "img/avatars"), "Filesystem permission error");
+		Kill(format("PHP does not seem to have write access to the /{1} directory ({0}/{1}). This is required for proper functionality. Please contact your hosting provider for information on how to make that directory writable.", $_SERVER['DOCUMENT_ROOT'], "img/avatars"), "Filesystem permission error");
 	else
 	{
 		fclose($test);
