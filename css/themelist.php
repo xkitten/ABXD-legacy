@@ -6,10 +6,9 @@
 //in favor of an easier system.
 
 $themes = array(
-	"default"=>"TRaSH (Default)",
+	"abxd20"=>"ABXD 2.0",
 
 	//Packins
-	"abxd20"=>"ABXD 2.0",
 	"defaultold"=>"ABXD Classic (rounded)",
 	"defaultsharp"=>"ABXD Classic (sharp)",
 	"cycle"=>"Daily Cycle",
@@ -17,14 +16,14 @@ $themes = array(
 	"grayscale"=>"Grayscale",
 	"monogreen"=>"Mono Green",
 	"cheese"=>"Old Cheese",
+	"default"=>"TRaSH",
 
 	//Additions
 );
 
 $themeBylines = array(
-	"default"=>"Based on GarBG by FirePhoenix<br />Messed up by Kawa",
-
 	"abxd20"=>"Design by Kawa",
+
 	"cheese"=>"Original by Acmlm<br />Ported by Kawa",
 	"cycle"=>"Design by Kawa",
 	"defaultold"=>"Design by Kawa",
@@ -32,6 +31,7 @@ $themeBylines = array(
 	"dos"=>"Design by Kawa",
 	"grayscale"=>"Design by Kawa<br />Variant on ABXD Classic.",
 	"monogreen"=>"Design by Kawa",
+	"default"=>"Based on GarBG by FirePhoenix<br />Messed up by Kawa",
 
 );
 
