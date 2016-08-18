@@ -6,10 +6,10 @@
 //in favor of an easier system.
 
 $themes = array(
-	"abxd20"=>"ABXD 2.0",
+	"defaultold"=>"ABXD Classic",
 
 	//Packins
-	"defaultold"=>"ABXD Classic (rounded)",
+	"abxd20"=>"ABXD 2.0",
 	"defaultsharp"=>"ABXD Classic (sharp)",
 	"cycle"=>"Daily Cycle",
 	"dos"=>"DOS-like",
@@ -22,11 +22,11 @@ $themes = array(
 );
 
 $themeBylines = array(
-	"abxd20"=>"Design by Kawa",
+	"defaultold"=>"Design by Kawa",
 
 	"cheese"=>"Original by Acmlm<br />Ported by Kawa",
 	"cycle"=>"Design by Kawa",
-	"defaultold"=>"Design by Kawa",
+	"abxd20"=>"Design by Kawa",
 	"defaultsharp"=>"Design by Kawa",
 	"dos"=>"Design by Kawa",
 	"grayscale"=>"Design by Kawa<br />Variant on ABXD Classic.",
