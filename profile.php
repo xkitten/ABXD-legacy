@@ -278,7 +278,8 @@ else
 ");
 }
 
-if($_POST['action'] == __("Post") && IsReallyEmpty(strip_tags($_POST['text'])) && $loguserid && $loguserid != $lastCID)
+if($_POST['action'] == __("Post") && IsReallyEmpty(strip_tags($_POST['text'])) && $loguserid 
+	/*&& $loguserid != $lastCID*/ && $_POST['token'] == $loguser['token'])
 {
 	AssertForbidden("makeComments");
 	$_POST['text'] = strip_tags($_POST['text']);
