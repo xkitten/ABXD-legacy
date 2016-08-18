@@ -319,8 +319,6 @@ if($loguserid)
 									</form>
 								</div>
 ", $id);
-	if($lastCID == $loguserid)
-		$commentField = __("You already have the last word.");
 	if(!IsAllowed("makeComments"))
 		$commentField = __("You are not allowed to post usercomments.");
 }
