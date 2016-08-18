@@ -1,5 +1,6 @@
 <?php
 //  AcmlmBoard XD support - Handy snippets
+//  yes, this is the footer as well, you dummies. by dummies, I mean myself.
 include_once("language.php");
 include_once("write.php");
 
@@ -43,9 +44,9 @@ function DoFooter($buffer)
 		$footer = format(
 "
 		<div class=\"footer\">
-			Powered by <a href=\"https://github.com/Dirbaio/ABXD\">AcmlmBoard XD</a>, version 2.2.6<br />
-			By Kawa, Mega-Mario, Nikolaj, et al<br />
-			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe<br />
+			Powered by <a href=\"https://github.com/xkitten/ABXD-legacy\">Acmlmboard XD</a> version 2.A1 <i>development</i><br />
+			By Kawa, StapleButter, Nina, moarninja, et al<br />
+			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe (Acmlm)<br />
 			".__("Page rendered in {0} seconds with {1}.")."<br />
 			{3}
 
