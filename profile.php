@@ -1,6 +1,7 @@
 <?php
 //  AcmlmBoard XD - User profile page
 //  Access: all
+//  old comment system was terrible; we've added the one more close to ABXD 3.0's
 
 include("lib/common.php");
 
