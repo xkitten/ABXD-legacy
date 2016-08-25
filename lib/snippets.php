@@ -43,9 +43,9 @@ function DoFooter($buffer)
 		$footer = format(
 "
 		<div class=\"footer\">
-			Powered by <a href=\"https://github.com/Dirbaio/ABXD\">AcmlmBoard XD</a>, version 2.2.6<br />
-			By Kawa, Mega-Mario, Nikolaj, et al<br />
-			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe<br />
+			Powered by <a href=\"https://xkitten/skyuboard/\">AcmlmBoard XD</a><br />
+			By Kawa, Mega-Mario, Nikolaj, [url=/credits.php]et al[/url]<br />
+			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe (Acmlm)<br />
 			".__("Page rendered in {0} seconds with {1}.")."<br />
 			{3}
 
