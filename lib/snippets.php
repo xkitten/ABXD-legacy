@@ -44,8 +44,8 @@ function DoFooter($buffer)
 		$footer = format(
 "
 		<div class=\"footer\">
-			Powered by <a href=\"https://github.com/xkitten/ABXD-legacy\">Acmlmboard XD</a> version 2.A1 <i>development</i><br />
-			By Kawa, StapleButter, Nina, moarninja, et al<br />
+			Powered by <a href=\"https://github.com/xkitten/skyuboard\">Acmlmboard XD</a> v2.2x.k <i>development</i><br />
+			By Kawa, Mega-Mario, Nikolaj, et al<br />
 			AcmlmBoard &copy; Jean-Fran&ccedil;ois Lapointe (Acmlm)<br />
 			".__("Page rendered in {0} seconds with {1}.")."<br />
 			{3}
@@ -57,7 +57,7 @@ function DoFooter($buffer)
 				<img src=\"img/css.png\" alt=\"Valid CSS!\" />
 			</a>
 			<a href=\"http://abxd.dirbaio.net/?page=downloads\">
-				<img src=\"img/getabxd.png\" alt=\"Get a copy for yourself\" />
+				<img src=\"img/getabxd.png\" alt=\"Get a copy for yourself.\" />
 			</a>
 			{2}
 		</div>
