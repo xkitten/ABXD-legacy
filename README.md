@@ -1,5 +1,7 @@
-# ABXD 2.A1 Development (ABXD 2.2.6 fork)
-this is a fork of ABXD 2.2.6. We're working on polishing up things with keeping the ABXD 2 look.
+# ABXD 2.A1
+this is a fork of ABXD 2.2.6. it's as dead as hitler so don't expect much.
+
+maybe xkitten.ml will have stuff. don't know for sure.
 
 as I say below, if you want to contribute, just fork and send a pull request. I may add it. :)
 # old description
